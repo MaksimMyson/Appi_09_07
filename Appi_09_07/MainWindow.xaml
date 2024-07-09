@@ -4,9 +4,61 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Appi_09_07"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Rick and Morty Characters" Height="600" Width="900"
+        materialDesign:ColorZoneAssist.Mode="PrimaryDark">
+    <Window.Resources>
+        <Style TargetType="ListBox">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10"/>
+        </Style>
+        <Style TargetType="Image">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Stretch" Value="Uniform"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="CharacterListBox" SelectionChanged="CharacterListBox_SelectionChanged"
+                 materialDesign:ColorZoneAssist.Mode="Light">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="5">
+                        <StackPanel>
+                            <Image Source="{Binding Image}" Height="100" Width="100" Margin="0,0,0,5"/>
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="10">
+                <Image x:Name="CharacterImage" Height="200" Margin="0,0,0,10"/>
+                <TextBlock x:Name="CharacterName" FontWeight="Bold"/>
+                <TextBlock x:Name="CharacterStatus"/>
+                <TextBlock x:Name="CharacterSpecies"/>
+                <TextBlock x:Name="CharacterGender"/>
+                <TextBlock x:Name="CharacterOrigin"/>
+                <TextBlock x:Name="CharacterLocation"/>
+                <TextBlock Text="Episodes:" FontWeight="Bold" Margin="10,20,10,10"/>
+                <ListBox x:Name="EpisodesListBox" materialDesign:ColorZoneAssist.Mode="Light">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
